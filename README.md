@@ -1,8 +1,41 @@
-# 安装
+## 引言
 
-业务部署依赖环境
+文档描述了如何为模式中台搭建依赖环境。
 
-## 编译器
+模式中台建议部署在```/public/home/bedrock```目录下。
+
+其依赖环境的目录如下， 请保持该目录接口。
+
+```
+[bedrock@node1 ~]$ tree -L 3 envs
+envs
+└── v1.0 # 依赖环境版本号
+    ├── conda
+    │   └── 4.8.2
+    ├── hdf5
+    │   └── 1.10.5
+    ├── intel
+    │   └── 2019.4
+    ├── ioapi
+    │   └── 3.2
+    ├── jasper
+    │   └── 1.900.1
+    ├── libpng
+    │   └── 1.6.37
+    ├── ncl
+    │   └── 6.5.0
+    ├── netcdf
+    │   ├── 4.7.0
+    │   ├── c
+    │   └── f
+    └── zlib
+        └── 1.2.11
+```
+
+## 安装依赖库
+
+
+#### 编译器
 安装目录：```INTEL=/public/home/bedrock/envs/v1.0/intel/2019.4 ```
 
 * 解压 
@@ -15,8 +48,8 @@ tar -zxvf intel-2019.4.tar.gz $INTEL
 
 ```
 cd $INTEL/compilers_and_libraries_2019/linux/bin
-vim compilervars.sh # 修改PROD_DIR=$INTEL/compilers_and_libraries_2019/linux
-vim ../../../debugger_2019/bin/debuggervars.sh #  INST="$INTEL"
+vim compilervars.sh # 修改 PROD_DIR=$INTEL/compilers_and_libraries_2019/linux
+vim ../../../debugger_2019/bin/debuggervars.sh #  INST=$INTEL
 ```
 
 * 检查证书
@@ -25,7 +58,7 @@ vim ../../../debugger_2019/bin/debuggervars.sh #  INST="$INTEL"
  $INTEL/compilers_and_libraries_2019.4.243/linux/Licenses
 ```
 
-## zlib
+#### zlib
 
 ```
 tar -zxvf zlib-1.2.11.tar.gz
@@ -33,7 +66,7 @@ CC=icc ./configure --prefix=/public/home/bedrock/envs/v1.0/zlib
 make intall
 ```
 
-## hdf5
+#### hdf5
 ```
 tar -zxvf  hdf5-1.10.5.tar.gz
 CC=icc FC=ifort CXX=icpc ./configure --with-zlib=/public/home/bedrock/envs/v1.0/zlib/1.2.11\
@@ -41,9 +74,9 @@ CC=icc FC=ifort CXX=icpc ./configure --with-zlib=/public/home/bedrock/envs/v1.0/
 make -j install
 ```
 
-## netcdf
+#### netcdf
 
-C库
+* C库
 
 ```
 tar -zxvf netcdf-c-4.7.0.tar.gz
@@ -55,11 +88,11 @@ LDFLAGS="-L/public/home/bedrock/envs/v1.0/hdf5/1.10.5/lib  -L/public/home/bedroc
 make -j install
 ```
 
-F库: 注意先配置C库的环境变量
+* F库: 注意先配置C库的环境变量
 
 ```
-tar -zxvf  hdf5-1.10.5.tar.gztar -zxvf netcdf-c-4.7.0.tar.gz
-
+tar -zxvf netcdf-c-4.7.0.tar.gz
+export LD_LIBRARY_PATH=/public/home/bedrock/envs/v1.0/netcdf/c/4.7.0/lib:$LD_LIBRARY_PATH
 CC=icc FC=ifort \
 CPPFLAGS=-I/public/home/bedrock/envs/v1.0/netcdf/c/4.7.0/include \
 LDFLAGS=-L/public/home/bedrock/envs/v1.0/netcdf/c/4.7.0/lib \
@@ -68,28 +101,49 @@ LDFLAGS=-L/public/home/bedrock/envs/v1.0/netcdf/c/4.7.0/lib \
 make -j install
 ```
 
-## jasper
+#### jasper
+
 ```
 tar -zxvf jasper-1.900.1.tar.gz
 CC=icc CXX=icpc ./configure --prefix=/public/home/bedrock/envs/v1.0/jasper/1.900.1
 make install
 ```
 
-## libpng
+#### libpng
+
+注意依赖zlib库
+
 ```
 tar -zxvf libpng-1.6.37.tar.gz
+LDFLAGS="-L/public/home/bedrock/envs/v1.0/zlib/1.2.11/lib" \
 CC=icc CXX=icpc ./configure --prefix=/public/home/bedrock/envs/v1.0/libpng/1.6.37
 make install
 ```
 
-## IOAPI
+#### IOAPI
 ```
 tar -zxvf ioapi-3.2-2020104.tar.gz
+cp Makefile.template Makefile
 修改makefile: 编译路径和编译器 和netcdf选项、路径；
+make all
 make install
 ```
 
-## ncl
+修改makefile内容
+```
+141 BIN        = Linux2_x86_64ifort                                                                           
+142 BASEDIR    = ${PWD}                                                                                          
+143 INSTALL    = /public/home/bedrock/envs/v1.0/ioapi/3.2                                                
+144 LIBINST    = /public/home/bedrock/envs/v1.0/ioapi/3.2/lib                             
+145 BININST    = /public/home/bedrock/envs/v1.0/ioapi/3.2/bin
+146 CPLMODE    = nocpl
+166 NCFLIBS   = -L/public/home/bedrock/envs/v1.0/netcdf/4.7.0/lib \
+                -L/public/home/bedrock/envs/v1.0/hdf5/1.10.5/lib \
+                -L/public/home/bedrock/envs/v1.0/zlib/1.2.11/lib \
+                -lnetcdff -lnetcdf -lhdf5_hl -lhdf5 -lz
+```
+
+#### ncl
 ```
 tar -zxvf ncl_ncarg-6.5.0-CentOS6.10_64bit_nodap_gnu447.tar.gz
 export NCARG_ROOT=$ENVS/ncl/6.5.0
@@ -97,7 +151,7 @@ export PATH=$NCARG_ROOT/bin:$PATH
 export LD_LIBRARY_PATH=$NCARG_ROOT/lib:$LD_LIBRARY_PATH
 ```
 
-# 环境变量
+## 配置环境变量
 
 ``` bash
 # clean
