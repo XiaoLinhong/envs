@@ -160,6 +160,27 @@ export PATH=$NCARG_ROOT/bin:$PATH
 export LD_LIBRARY_PATH=$NCARG_ROOT/lib:$LD_LIBRARY_PATH
 ```
 
+#### conda
+```
+bash Miniconda3-latest-Linux-x86_64.sh # 执行中间给定安装路径
+# /public/home/bedrock/envs/v1.0/conda/4.8.2
+```
+
+配置配置国内源
+```
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/msys2/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge 
+conda config --set show_channel_urls yes
+```
+
+安装conda库
+```
+conda install Cython Flask Flask-Cors gunicorn pycryptodome peewee numpy
+conda install ecflow # 比较大
+```
+
 ## 配置环境变量
 
 ``` bash
