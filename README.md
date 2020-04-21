@@ -101,6 +101,9 @@ LDFLAGS=-L/public/home/bedrock/envs/v1.0/netcdf/c/4.7.0/lib \
 make -j install
 ```
 
+最后将C库和F库链接到一起：``` /public/home/bedrock/envs/v1.0/netcdf4.7.0  ```
+
+
 #### jasper
 
 ```
@@ -141,6 +144,12 @@ make install
                 -L/public/home/bedrock/envs/v1.0/hdf5/1.10.5/lib \
                 -L/public/home/bedrock/envs/v1.0/zlib/1.2.11/lib \
                 -lnetcdff -lnetcdf -lhdf5_hl -lhdf5 -lz
+```
+
+将安装包中的部分文件，移动到安装目录（二次开发会用到）
+
+```
+cp -r ioapi/*.EXT  ioapi/fixed_src/ ioapi/Makeinclude.Linux2_x86_64ifort ~/envs/v1.0/ioapi/3.2/ioapi/
 ```
 
 #### ncl
