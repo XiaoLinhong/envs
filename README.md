@@ -4,7 +4,7 @@
 
 模式中台建议部署在```/public/home/bedrock```目录下。
 
-其依赖环境的目录如下， 请保持该目录接口。
+其依赖环境的目录如下， 请保持该目录结构。
 
 ```
 [bedrock@node1 ~]$ tree -L 3 envs
@@ -182,7 +182,7 @@ source $INTEL/compilers_and_libraries_2019.4.243/linux/bin/compilervars.sh intel
 ZLIB=$ENVS/zlib/1.2.11
 export LD_LIBRARY_PATH=$ZLIB/lib:$LD_LIBRARY_PATH
 
-# hdfr
+# hdf5
 HDF5=$ENVS/hdf5/1.10.5
 export LD_LIBRARY_PATH=$HDF5/lib:$LD_LIBRARY_PATH
 
