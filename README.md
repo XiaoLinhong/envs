@@ -221,7 +221,7 @@ export JASPERINC=$JASPER/include # 安装WRF需要
 
 # libpng
 LIBPNG=$ENVS/libpng/1.6.37
-export LD_LIBRARY_PATH=$PNG/lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$LIBPNG/lib:$LD_LIBRARY_PATH
 
 # ioapi
 IOAPI=$ENVS/ioapi/3.2
