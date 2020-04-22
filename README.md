@@ -69,7 +69,7 @@ make intall
 #### hdf5
 ```
 tar -zxvf  hdf5-1.10.5.tar.gz
-CC=icc FC=ifort CXX=icpc ./configure --with-zlib=/public/home/bedrock/envs/v1.0/zlib/1.2.11\
+CC=icc FC=ifort CXX=icpc ./configure --enable-fortran --with-zlib=/public/home/bedrock/envs/v1.0/zlib/1.2.11 \
 --prefix=/public/home/bedrock/envs/v1.0/hdf5/1.10.5
 make -j install
 ```
