@@ -92,6 +92,7 @@ make -j install
 
 ```
 tar -zxvf netcdf-c-4.7.0.tar.gz
+export LD_LIBRARY_PATH=/public/home/bedrock/envs/v1.0/hdf5/1.10.5/lib:$LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=/public/home/bedrock/envs/v1.0/netcdf/c/4.7.0/lib:$LD_LIBRARY_PATH
 CC=icc FC=ifort \
 CPPFLAGS=-I/public/home/bedrock/envs/v1.0/netcdf/c/4.7.0/include \
@@ -204,30 +205,33 @@ ZLIB=$ENVS/zlib/1.2.11
 export LD_LIBRARY_PATH=$ZLIB/lib:$LD_LIBRARY_PATH
 
 # hdf5
-HDF5=$ENVS/hdf5/1.10.5
+export HDF5=$ENVS/hdf5/1.10.5 # 安装WRF需要
 export LD_LIBRARY_PATH=$HDF5/lib:$LD_LIBRARY_PATH
 
 # netcdf
-NETCDF=$ENVS/netcdf/4.7.0
+export NETCDF=$ENVS/netcdf/4.7.0 # WPS安装需要
 export PATH=$NETCDF/bin:$PATH
 export LD_LIBRARY_PATH=$NETCDF/lib:$LD_LIBRARY_PATH
 
 # jasper
 JASPER=$ENVS/jasper/1.900.1
 export LD_LIBRARY_PATH=$JASPER/lib:$LD_LIBRARY_PATH
+export JASPERLIB=$JASPER/lib # 安装WRF需要
+export JASPERINC=$JASPER/include # 安装WRF需要
 
 # libpng
-PNG=$ENVS/libpng/1.6.37
+LIBPNG=$ENVS/libpng/1.6.37
 export LD_LIBRARY_PATH=$PNG/lib:$LD_LIBRARY_PATH
 
 # ioapi
 IOAPI=$ENVS/ioapi/3.2
 export PATH=$IOAPI/bin:$PATH
 
-#ncl
+# ncl
 export NCARG_ROOT=$ENVS/ncl/6.5.0
 export PATH=$NCARG_ROOT/bin:$PATH
 export LD_LIBRARY_PATH=$NCARG_ROOT/lib:$LD_LIBRARY_PATH
+
 
 ```
 
