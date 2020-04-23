@@ -153,6 +153,14 @@ make install
 cp -r ioapi/*.EXT  ioapi/fixed_src/ ioapi/Makeinclude.Linux2_x86_64ifort ~/envs/v1.0/ioapi/3.2/ioapi/
 ```
 
+### mvapich
+camx 编译需要
+```
+tar -zxvf mvapich2-1.9-r7024.tar
+CC=icc CXX=icpc F77=ifort FC=ifort ./configure --prefix=/public/home/bedrock/envs/v1.0/mvapich/2-1.9
+make -j install
+```
+
 #### ncl
 ```
 tar -zxvf ncl_ncarg-6.5.0-CentOS6.10_64bit_nodap_gnu447.tar.gz
