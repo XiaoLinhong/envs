@@ -186,8 +186,18 @@ conda config --set show_channel_urls yes
 
 安装conda库
 ```
-conda install Cython Flask Flask-Cors gunicorn pycryptodome peewee numpy
-conda install ecflow # 比较大
+
+conda install Cython Flask Flask-Cors gunicorn pycryptodome peewee numpy scipy openpyxl xarray -y
+conda install ecflow -y # 比较大
+conda install pygrib -y
+conda install matplotlib -y
+conda install cartopy -y
+conda install netcdf4 -y
+conda install esmpy -y
+
+conda install cdo -y # 命令
+conda install ncview -y # 命令
+
 ```
 
 ## 配置环境变量
