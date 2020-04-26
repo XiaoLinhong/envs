@@ -147,6 +147,13 @@ make install
                 -lnetcdff -lnetcdf -lhdf5_hl -lhdf5 -lz
 ```
 
+修改编译选项 ```vim ioapi/Makeinclude.Linux2_x86_64ifort```
+
+```
+ 25 OMPFLAGS  = #-qopenmp      # for Intel compilers, version 15 or earlier
+ 26 OMPLIBS   = #-qopenmp
+```
+
 将安装包中的部分文件，移动到安装目录（二次开发会用到）
 
 ```
