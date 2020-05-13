@@ -22,6 +22,8 @@ envs
     │   └── 1.900.1
     ├── libpng
     │   └── 1.6.37
+    ├── mvapich
+    │   └── 2-1.9
     ├── ncl
     │   └── 6.5.0
     ├── netcdf
@@ -187,13 +189,15 @@ conda config --set show_channel_urls yes
 安装conda库
 ```
 
-conda install Cython Flask Flask-Cors gunicorn pycryptodome peewee numpy scipy openpyxl xarray -y
+conda install Cython Flask Flask-Cors gunicorn pycryptodome peewee numpy scipy openpyxl scipy sklearn xarray -y
 conda install ecflow -y # 比较大
 conda install pygrib -y
 conda install matplotlib -y
 conda install cartopy -y
 conda install netcdf4 -y
 conda install esmpy -y
+conda install PseudoNetCDF -y
+conda install wrf-python -y
 
 conda install cdo -y # 命令
 conda install ncview -y # 命令
