@@ -22,6 +22,8 @@ envs
     │   └── 1.900.1
     ├── libpng
     │   └── 1.6.37
+    ├── mvapich
+    │   └── 2-1.9
     ├── ncl
     │   └── 6.5.0
     ├── netcdf
@@ -160,6 +162,14 @@ make install
 cp -r ioapi/*.EXT  ioapi/fixed_src/ ioapi/Makeinclude.Linux2_x86_64ifort ~/envs/v1.0/ioapi/3.2/ioapi/
 ```
 
+### mvapich
+camx 编译需要
+```
+tar -zxvf mvapich2-1.9-r7024.tar
+CC=icc CXX=icpc F77=ifort FC=ifort ./configure --prefix=/public/home/bedrock/envs/v1.0/mvapich/2-1.9
+make -j install
+```
+
 #### ncl
 ```
 tar -zxvf ncl_ncarg-6.5.0-CentOS6.10_64bit_nodap_gnu447.tar.gz
@@ -185,8 +195,20 @@ conda config --set show_channel_urls yes
 
 安装conda库
 ```
-conda install Cython Flask Flask-Cors gunicorn pycryptodome peewee numpy
-conda install ecflow # 比较大
+
+conda install Cython Flask Flask-Cors gunicorn pycryptodome peewee numpy scipy openpyxl scipy sklearn xarray -y
+conda install ecflow -y # 比较大
+conda install pygrib -y
+conda install matplotlib -y
+conda install cartopy -y
+conda install netcdf4 -y
+conda install esmpy -y
+conda install PseudoNetCDF -y
+conda install wrf-python -y
+
+conda install cdo -y # 命令
+conda install ncview -y # 命令
+
 ```
 
 ## 配置环境变量
